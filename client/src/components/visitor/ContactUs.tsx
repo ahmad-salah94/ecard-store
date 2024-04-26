@@ -27,7 +27,10 @@ const ButtonWithText: React.FC<ButtonWithTextProps> = ({
 
 // Main component
 const ContactUs: React.FC = () => (
-  <div className="container mx-auto  lg:w-[80vw] shadow-lg lg:-translate-y-[50px] md:w-[90%] md:-translate-y-[50px] ">
+  <div
+    className="container mx-auto  lg:w-[80vw] shadow-lg lg:-translate-y-[50px] md:w-[90%] md:-translate-y-[50px] "
+    id="contact-us"
+  >
     <div className="flex flex-col md:flex-row justify-between w-full ">
       {/* First div with buttons */}
       <div className="md:w-1/2  mb-8 md:mb-0 bg-gray-200 p-8 flex flex-col justify-center gap-8 ">

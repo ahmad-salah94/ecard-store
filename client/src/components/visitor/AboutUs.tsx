@@ -41,7 +41,7 @@ const AboutUsSection: React.FC<{
 
 const AboutUs = () => {
   return (
-    <div>
+    <div id="about-us">
       <h1 className="text-5xl font-bold text-center my-12">اعرف المزيد عنا</h1>
       <AboutUsSection
         title="عنا رقم 1"

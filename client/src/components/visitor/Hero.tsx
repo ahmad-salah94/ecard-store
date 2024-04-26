@@ -1,7 +1,10 @@
 import "./styles/hero.css";
 const HeroSection = () => {
   return (
-    <div className="container mx-auto flex flex-wrap items-center justify-between p-10 min-h-[70vh]  flex-col md:flex-row-reverse mt-[50px] ">
+    <div
+      className="container mx-auto flex flex-wrap items-center justify-between p-10 min-h-[70vh]  flex-col md:flex-row-reverse mt-[50px] "
+      id="home"
+    >
       <div className="w-full flex flex-col gap-4 text-right md:w-1/2">
         <h1 className="text-4xl font-bold mb-6">
           شركتنا هي الافضل في الشرق الاوسط لبيع

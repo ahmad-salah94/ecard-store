@@ -32,7 +32,7 @@ const Service: React.FC<ServiceProps> = ({
 
 const VisitorServices: React.FC = () => {
   return (
-    <div className="container mx-auto text-center p-8">
+    <div className="container mx-auto text-center p-8" id="our-services">
       <h1 className="text-5xl mb-16 font-bold ">
         {" "}
         <span className="text-primary">خدماتنا</span> سر تميزنا

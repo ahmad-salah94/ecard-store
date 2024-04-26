@@ -9,6 +9,8 @@ import "./App.css";
 import "./index.css";
 import VisitorLayout from "./components/layouts/VisitorLayout";
 import Main from "./pages/unSingedInUser/Main";
+import Login from "./pages/auth/Login";
+import SignUp from "./pages/auth/SignUp";
 
 function App() {
   const router = createBrowserRouter(
@@ -16,8 +18,8 @@ function App() {
       // <Routes>
       <Route path="/" element={<VisitorLayout />}>
         <Route index element={<Main />} />
-        {/* <Route path="/signin" element={<Signin />} />
-          <Route path="/signup" element={<Signup />} /> */}
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
       </Route>
       // </Routes>
     )

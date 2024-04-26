@@ -1,12 +1,14 @@
-import Navbar from "../common/Navbar";
+import VisitorNavbar from "../visitor/VisitorNavbar";
 import { Outlet } from "react-router-dom";
 import VisitorFooter from "../visitor/VisitorFooter";
 
 const VisitorLayout = () => {
   return (
-    <div className="bg-background">
-      <Navbar />
-      <Outlet />
+    <div className="bg-primary-bg">
+      <VisitorNavbar />
+      <main className="min-h-screen">
+        <Outlet />
+      </main>
       <VisitorFooter />
     </div>
   );
