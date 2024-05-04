@@ -1,0 +1,78 @@
+{
+  
+  "home_link_name": "GoCard ",
+  "our_services_link_name": "Services",
+  "about_us_link_name": "About Us",
+  "contact_us_link_name": "Contact Us",
+  "our_products_link_name": "Products",
+  "sign_in_button": "Login",
+  "sign_up_button": "Register",
+
+  "hero_title": "Our Company is the best in the middle east in selling ",
+  "hero_title_span": "online cards , number and others",
+  "hero_text": "charge your account in a one step ,with a single click from home.",
+  "hero_signIn": "sign in now",
+  
+
+  "our_products_title": "Our Products",
+
+  "our_services_title": "Our Services are ",
+  "our_services_title_span": "what distinguish us",
+  "our_services_one_title": "special delievery",
+  "our_services_one_text": "with one click in your home ",
+  "our_services_two_title": "great pricing",
+  "our_services_two_text": "we provide competitive prices in the market",
+  "our_services_three_title": "easy use",
+  "our_services_three_text": "comfortable and good looking UI",
+  "our_services_four_title": "technical support",
+  "our_services_four_text": "we provide technical support 24/7",
+
+  "about_us": "more about us",
+  "about_us_title_one": "about us number 1",
+  "about_us_text_one": "about us number 1about us number 1about us number 1about us number 1about us number 1",
+  "about_us_title_two": "about us number 1about us number 1about us number 1about us number 1",
+  "about_us_text_two": "about us number 2about us number 2about us number 2about us number 2about us number 2",
+  "contact_us_phone_text": "Phone Number",
+  "contact_us_location_text": "location",
+  "contact_us_email_text": "email",
+
+  
+  "sign_in_title": "Welcome back.",
+  "sign_in_text": "Glad to see you again.",
+  "sign_in_email_text": "Email",
+  "sign_in_password_text": "Password",
+  "sign_in_button_text": "Sign In",
+  "sign_in_make_account_text": "Don't have an account?",
+  "sign_in_make_account_span": "Create an account now",
+  "sign_in_enter_email_text": "Enter your email",
+  "sign_in_enter_a_valid_email_text": "Enter a valid email",
+  "sign_in_enter_password_text": "Enter your password",
+  "sign_in_failed_signin_toast": "Sign in failed.",
+  "sign_in_successful_signin_toast": "Sign in successful.",
+  
+  
+  "sign_up_title": "Create an account.",
+  "sign_up_text": "Glad to see you again.",
+  "sign_up_full_name_text": "Full Name",
+  "sign_up_email_text": "Email",
+  "sign_up_phone_text": "Phone",
+  "sign_up_address_text": "Address",
+  "sign_up_password_text": "Password",
+  "sign_up_re_password_text": "Confirm Password",
+  "sign_up_captcha_text": "solve the equation",
+  "sign_up_button_text": "Sign Up",
+  "sign_up_make_account_text": "Already have an account?",
+  "sign_up_make_account_span": "Sign In",
+  "sign_up_enter_full_name_text": "Enter your email",
+  "sign_up_enter_email_text": "Enter your email",
+  "sign_up_enter_phone_number_text": "Enter your email",
+  "sign_up_enter_address_text": "Enter your email",
+  "sign_up_enter_a_valid_email_text": "Enter a valid email",
+  "sign_up_enter_password_text": "Enter your password",
+  "sign_up_enter_alike_passwords_text": "Enter your password",
+  "sign_up_false_captcha_text": "Enter your password",
+  "sign_up_failed_signin_toast": "Sign in failed.",
+  "sign_uo_successful_signin_toast": "Sign in successful."
+  
+  
+}

@@ -1,13 +1,26 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useLayoutEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
+import { BASE_URL } from "@/redux/slices/auth";
+
+import Loading from "@/components/common/Loading";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import axios from "axios";
+import { GoogleLogin } from "@react-oauth/google";
+import { jwtDecode } from "jwt-decode";
+import { useTranslation } from "react-i18next";
 
 const SignUp: React.FC = () => {
+  // sign up data  in states
   const [fullName, setFullName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [mobilePhone, setMobilePhone] = useState<string>("");
   const [address, setAddress] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [reenterPassword, setReenterPassword] = useState<string>("");
+
+  // captcha states
   const [userCaptcha, setUserCaptcha] = useState<string>("");
   const [captchaSolution, setCaptchaSolution] = useState<number>(0);
   const [captchaQuestion, setCaptchaQuestion] = useState<string>("");
@@ -20,11 +33,18 @@ const SignUp: React.FC = () => {
   const [passwordError, setPasswordError] = useState<string>("");
   const [reenterPasswordError, setReenterPasswordError] = useState<string>("");
   const [captchaError, setCaptchaError] = useState<string>("");
+  const [emailApiErrors, setEmailApiErrors] = useState<string[]>([]);
 
+  // loading state
+  const [loading, setLoading] = useState<boolean>(false);
+  const { t } = useTranslation();
+  const navigate = useNavigate();
+  // generate captcha
   useEffect(() => {
     generateCaptcha();
   }, []);
 
+  // generate captcha fn
   const generateCaptcha = () => {
     const num1 = Math.ceil(Math.random() * 10);
     const num2 = Math.ceil(Math.random() * 10);
@@ -32,61 +52,60 @@ const SignUp: React.FC = () => {
     setCaptchaQuestion(`${num1} + ${num2}`);
   };
 
+  // validation
   const validate = (): boolean => {
     let isValid = true;
     // Reset errors
-    setFullNameError("");
-    setEmailError("");
-    setMobilePhoneError("");
-    setAddressError("");
-    setPasswordError("");
-    setReenterPasswordError("");
-    setCaptchaError("");
+    setFullNameError(t("sign_up_enter_full_name_text"));
+    setEmailError(t("sign_up_enter_email_text"));
+    setMobilePhoneError(t("sign_up_enter_phone_number_text"));
+    setAddressError(t("sign_up_enter_address_text"));
+    setPasswordError(t("sign_up_enter_password_text"));
+    setReenterPasswordError(t("sign_up_enter_alike_passwords_text"));
+    setCaptchaError(t("sign_up_false_captcha_text"));
 
     // Full name validation
     if (!fullName.trim()) {
-      setFullNameError("من فضلك ادخل اسمك بالكامل");
+      setFullNameError(t("sign_up_enter_full_name_text"));
       isValid = false;
     }
 
     // Email validation
     if (!email.trim()) {
-      setEmailError("من فضلك ادخل الايميل");
+      setEmailError(t("sign_up_enter_email_text"));
       isValid = false;
     }
 
     // Mobile phone validation
     if (!mobilePhone.trim()) {
-      setMobilePhoneError("من فضلك ادخل رقم الهاتف.");
+      setMobilePhoneError(t("sign_up_enter_phone_number_text"));
       isValid = false;
     }
 
     // Address validation
     if (!address.trim()) {
-      setAddressError("من فضلك ادخل عنوانك.");
+      setAddressError(t("sign_up_enter_address_text"));
       isValid = false;
     }
 
     // Password validation
     if (!password) {
-      setPasswordError("من فضلك ادخل الرقم السري.");
+      setPasswordError(t("sign_up_enter_password_text"));
       isValid = false;
     } else if (!/^(?=.*[0-9])(?=.*[a-zA-Z])(.{8,})$/.test(password)) {
-      setPasswordError(
-        "يجب ان يحتوي الرقم السري علي 8 احرف او ارقام علي الاقل."
-      );
+      setPasswordError(t("sign_up_enter_password_text"));
       isValid = false;
     }
 
     // Re-enter password validation
     if (password !== reenterPassword) {
-      setReenterPasswordError("الارقام السرية غير متشابهة.");
+      setReenterPasswordError(t("sign_up_enter_alike_passwords_text"));
       isValid = false;
     }
 
     // Captcha validation
     if (!userCaptcha.trim() || parseInt(userCaptcha) !== captchaSolution) {
-      setCaptchaError("اجابة خاطئة من فضلك ادخل الاجابة مرة اخري.");
+      setCaptchaError(t("sign_up_false_captcha_text"));
       generateCaptcha();
       isValid = false;
     }
@@ -94,40 +113,94 @@ const SignUp: React.FC = () => {
     return isValid;
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  useLayoutEffect(() => {
+    if (localStorage.getItem("token")) {
+      navigate("/");
+    }
+  }, [navigate]);
+
+  // handling sending data
+  const handleGoogleSignUp = async () => {
+    setLoading(true);
+    try {
+      // Replace with your actual Google OAuth endpoint
+      const response = await axios.get(`${BASE_URL}/api/auth/google`);
+      setLoading(false);
+      console.log(response.data);
+      toast.success(t("sign_uo_successful_signin_toast"));
+      // Handle successful sign-up (e.g., store user data, set authentication state)
+    } catch (error) {
+      console.error("Error occurred:", error);
+      toast.error(t("sign_up_failed_signin_toast"));
+      setLoading(false);
+    }
+  };
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (validate()) {
-      console.log("worked");
+      setLoading(true);
+      try {
+        const response = await axios.post(`${BASE_URL}/api/auth/register`, {
+          name: fullName,
+          email,
+          mobilePhone,
+          address,
+          password,
+        });
+        setLoading(false);
+        if (response.data.message === "User registered successfully ") {
+          toast.success(t("sign_uo_successful_signin_toast"));
+          setLoading(false);
+        }
+        if (response.data.errors) {
+          if (response.data.errors.email) {
+            setEmailApiErrors(response.data.errors.email);
+            toast.error(t("sign_up_failed_signin_toast"));
+            setLoading(false);
+          }
+        }
+      } catch (error) {
+        console.error("Error occurred:", error);
+        toast.success(t("sign_up_failed_signin_toast"));
+        setLoading(false);
+      }
     }
-    // if (parseInt(userCaptcha) !== captchaSolution) {
-    //   alert("Incorrect captcha, please try again!");
-    //   setUserCaptcha("");
-    //   generateCaptcha();
-    //   return;
-    // }
-    console.log("Captcha correct, proceed with form submission");
-    // Here you would typically handle the form submission, e.g., sending data to a server
   };
 
   return (
     <div className=" flex mt-[100px]">
+      <ToastContainer />
+      {loading && <Loading />}
       <div
         className="hidden lg:flex w-full lg:w-1/2
           justify-around items-center bg-white"
       >
-        <img src="/public/signup.svg" alt="Signup" />
+        <motion.img
+          src="/public/signup.svg"
+          alt="Signup"
+          initial={{ opacity: 0, x: -150 }} // Initial opacity and translation
+          whileInView={{ opacity: 1, x: 0 }} // Animation based on inView
+          viewport={{ once: true }}
+          transition={{ duration: 1.5 }}
+        />
       </div>
       <div className="flex w-full lg:w-1/2 justify-center items-center bg-white space-y-8 ">
-        <div className="w-full px-8 md:px-32 lg:px-24 text-right ">
+        <motion.div
+          className="w-full px-8 md:px-32 lg:px-24 text-right "
+          initial={{ opacity: 0, y: 50 }} // Initial opacity and translation
+          whileInView={{ opacity: 1, y: 0 }} // Animation based on inView
+          viewport={{ once: true }}
+          transition={{ duration: 1 }}
+        >
           <form
             className="bg-white rounded-md shadow-2xl p-5 "
             onSubmit={handleSubmit}
           >
             <h1 className="text-gray-800 font-bold text-2xl mb-1 text-primary">
-              انشاء حساب
+              {t("sign_up_title")}
             </h1>
             <p className="text-sm font-normal text-gray-600 mb-8">
-              الرجاء اضافة البيانات التالية
+              {t("sign_up_text")}
             </p>
 
             {/* Full Name Input */}
@@ -151,7 +224,7 @@ const SignUp: React.FC = () => {
                 className="pl-2 w-full outline-none border-none text-right"
                 type="text"
                 name="fullName"
-                placeholder="الاسم بالكامل"
+                placeholder={t("sign_up_full_name_text")}
                 onChange={(e) => setFullName(e.target.value)}
               />
             </div>
@@ -182,7 +255,7 @@ const SignUp: React.FC = () => {
                 className="pl-2 w-full outline-none border-none text-right"
                 type="email"
                 name="email"
-                placeholder="الايميل"
+                placeholder={t("sign_up_email_text")}
                 onChange={(e) => setEmail(e.target.value)}
               />
             </div>
@@ -191,6 +264,14 @@ const SignUp: React.FC = () => {
                 {emailError}
               </div>
             )}
+            {emailApiErrors &&
+              emailApiErrors.map((err) => (
+                <div className="text-red-500 text-sm -translate-y-2 mb-4">
+                  {err == "The email has already been taken."
+                    ? t("email_already_taken_message")
+                    : err}
+                </div>
+              ))}
 
             {/* Mobile Phone Input */}
             <div className="flex items-center border-2 mb-4 py-2 px-3 rounded-2xl">
@@ -213,7 +294,7 @@ const SignUp: React.FC = () => {
                 className="pl-2 w-full outline-none border-none text-right"
                 type="text"
                 name="mobilePhone"
-                placeholder="رقم الهاتف"
+                placeholder={t("sign_up_phone_text")}
                 onChange={(e) => setMobilePhone(e.target.value)}
               />
             </div>
@@ -244,7 +325,7 @@ const SignUp: React.FC = () => {
                 className="pl-2 w-full outline-none border-none text-right"
                 type="text"
                 name="address"
-                placeholder="العنوان"
+                placeholder={t("sign_up_address_text")}
                 onChange={(e) => setAddress(e.target.value)}
               />
             </div>
@@ -273,7 +354,7 @@ const SignUp: React.FC = () => {
                 type="password"
                 name="password"
                 id="password"
-                placeholder="الرقم السري"
+                placeholder={t("sign_up_password_text")}
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
@@ -304,7 +385,7 @@ const SignUp: React.FC = () => {
                 type="password"
                 name="reenterPassword"
                 id="reenterPassword"
-                placeholder="اعد كتابة الرقم السري"
+                placeholder={t("sign_up_re_password_text")}
                 onChange={(e) => setReenterPassword(e.target.value)}
               />
             </div>
@@ -316,11 +397,11 @@ const SignUp: React.FC = () => {
 
             {/* Captcha input */}
             <div className="flex justify-between items-center border-2 mb-4 py-2 px-3 rounded-2xl">
-              <span>{captchaQuestion}</span>
+              <span>{t("sign_up_captcha_text")}</span>
               <input
                 className="pl-2 outline-none border-none"
                 type="text"
-                placeholder="قم بحيل اللغز"
+                placeholder={t("sign_up_captcha_text")}
                 value={userCaptcha}
                 onChange={(e) => setUserCaptcha(e.target.value)}
               />
@@ -335,50 +416,34 @@ const SignUp: React.FC = () => {
               type="submit"
               className="block w-full bg-indigo-600 mt-5 py-2 rounded-2xl hover:bg-indigo-700  transition-all duration-500 text-white font-semibold mb-2"
             >
-              انشاء حساب
+              {t("sign_up_button_text")}
             </button>
-            <button
-              type="button"
-              className="block w-full bg-foreground mt-5 py-2 rounded-2xl hover:bg-primary  transition-all duration-500 text-white font-semibold"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                x="0px"
-                y="0px"
-                width="100"
-                height="100"
-                viewBox="0 0 48 48"
-                className="w-7 h-7 text-center mx-auto"
-              >
-                <path
-                  fill="#FFC107"
-                  d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12c0-6.627,5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24c0,11.045,8.955,20,20,20c11.045,0,20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z"
-                ></path>
-                <path
-                  fill="#FF3D00"
-                  d="M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z"
-                ></path>
-                <path
-                  fill="#4CAF50"
-                  d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36c-5.202,0-9.619-3.317-11.283-7.946l-6.522,5.025C9.505,39.556,16.227,44,24,44z"
-                ></path>
-                <path
-                  fill="#1976D2"
-                  d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571c0.001-0.001,0.002-0.001,0.003-0.002l6.19,5.238C36.971,39.205,44,34,44,24C44,22.659,43.862,21.35,43.611,20.083z"
-                ></path>
-              </svg>
+            <button className="w-full flex justify-center items-center">
+              <GoogleLogin
+                onSuccess={(credentialResponse) => {
+                  console.log(credentialResponse);
+                  const resData = jwtDecode(credentialResponse.credential);
+
+                  // handleGoogleLogin(resData);
+                }}
+                onError={() => {
+                  console.log("login failed");
+                }}
+              />
             </button>
             <div className="flex justify-between mt-4 text-right w-full">
               <Link
                 to={"/login"}
                 className="text-sm ml-2 hover:underline cursor-pointer  duration-500 transition-all w-full"
               >
-                لديك حساب بالفعل؟{" "}
-                <span className="text-primary">تسجيل الدخول</span>
+                {t("sign_up_make_account_text")}{" "}
+                <span className="text-primary">
+                  {t("sign_up_make_account_span")}
+                </span>
               </Link>
             </div>
           </form>
-        </div>
+        </motion.div>
       </div>
     </div>
   );
