@@ -1,4 +1,6 @@
 {
+
+  "dir": "ltr", 
   "home_link_name": "جو كارد",
   "our_services_link_name": "خدماتنا",
   "about_us_link_name": "عنا",
@@ -70,5 +72,112 @@
   "sign_up_enter_alike_passwords_text": "أدخل كلمة المرور الخاصة بك",
   "sign_up_false_captcha_text": "أدخل كلمة المرور الخاصة بك",
   "sign_up_failed_signin_toast": "فشل تسجيل الدخول.",
-  "sign_uo_successful_signin_toast": "تم تسجيل الدخول بنجاح."
+  "sign_uo_successful_signin_toast": "تم تسجيل الدخول بنجاح.",
+
+  "user_navbar":{
+    "logo": "لوجو",
+    "logout": "تسجيل الخروج",
+    "notification": "الاشعارات"
+  },
+
+
+  "user_our_distriputer":{
+    "our_agents": "وكلاؤنا ",
+    "general_management": "الادارة العامة",
+    "chat_with_him": "تواصل معه"
+  },
+
+  "user_sidebar":{
+    "main": "جو كارد ",
+    "orders": "الطلبات",
+    "invoices": "الفواتير",
+    "transaction_log": "سجل العمليات",
+    "our_agents": "وكلاؤنا",
+    "support": "الدعم الفني",
+    "settings": "الاعدادات"
+  },
+
+  "user_orders":{
+    "title": "الطلبات ",
+    "filter_all_orders": "الكل",
+    "filter_waiting_orders": "قيد المراجعة",
+    "filter_succeded_orders": "نجاح",
+    "filter_failed_orders": "فشل",
+    "search": "بحث",
+    "search_placeholder": "بحث عن طلب",
+    "order_number": "رقم الطلب",
+    "product": "المنتج ",
+    "player_subscriber": "الاعب/المشترك",
+    "price": "السعر",
+    "status": "الحالة",
+    "buying_history": "تاريخ الشراء"
+  },
+
+  "user_invoices":{
+    "title": "الفواتير وإضافة الدفع",
+    "charge_money": "شحن الرصيد",
+    "charge_with_coupon": "إضافة قسيمة",
+    "search": "بحث",
+    "search_placeholder": "البحث عن الفاتورة",
+    "payment_ensure": "تأكيد الدفع",
+    "invoice_number": "رقم الفاتورة",
+    "payment_method": "طريقة الدفع",
+    "ammount": "المبلغ",
+    "status": "الحالة",
+    "history": "التاريخ",
+    "coupon_title": "إضافة قسيمة",
+    "coupon_cancel": "إلغاء",
+    "coupon_check": "تحقق من القسيمة",
+    "bank": "البنك",
+    "lord_box": "صندوق السيد",
+    "syria_phone": "هاتف سوريا",
+    "straight_send": "إرسال مباشر",
+    "seretel_MTN_cash": "سيرتيل و MTN كاش",
+    "paypal": "باي بال",
+    "USDT": "USDT",
+    "payeer": "باير" 
+  },
+
+  "transaction_log":{
+    "title": "سجل العمليات",
+    "transaction_number": "رقم العملية",
+    "value": "القيمة",
+    "type": "العملية"
+    
+  },
+
+  "support":{
+    "title": "الدعم الفني",
+    "text": "إدا كان لديك أي تساؤلات او إستفسارات او تريد تقديم إقتراحات للموقع  يمكنك مراسلة فريق الدعم",
+    "whatsapp": "واتساب",
+    "telegram": "تليجرام"
+  },
+
+  
+  "profile_settings": {
+    "title": "الإعدادات",
+    "full_name": "الاسم الكامل",
+    "full_name_placeholder": "الاسم الكامل",
+    "email": "البريد الإلكتروني",
+    "email_placeholder": "البريد الإلكتروني",
+    "phone_number": "رقم الهاتف",
+    "phone_number_placeholder": "رقم الهاتف",
+    "save_data": "حفظ البيانات",
+    "old_password": "كلمة المرور القديمة",
+    "old_password_placeholder": "كلمة المرور القديمة",
+    "new_password": "كلمة المرور الجديدة",
+    "new_password_placeholder": "كلمة المرور الجديدة",
+    "reenter_new_password": "إعادة إدخال كلمة المرور الجديدة",
+    "reenter_new_password_placeholder": "إعادة إدخال كلمة المرور الجديدة",
+    "change_password": "تغيير كلمة المرور",
+    "image_size_alert": "حجم الصورة يتجاوز الحد المسموح به (200 كيلوبايت)",
+    "profile_image": "الصورة الشخصية",
+    "select_file": "اختر ملف"
+  
   }
+  
+
+
+
+}
+

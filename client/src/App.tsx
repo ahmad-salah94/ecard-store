@@ -3,8 +3,6 @@ import {
   createRoutesFromElements,
   Route,
   RouterProvider,
-
-  // Routes,
 } from "react-router-dom";
 import "./App.css";
 import "./index.css";
@@ -18,28 +16,38 @@ import NotFound from "./pages/unSingedInUser/NotFound";
 import Categories from "./pages/unSingedInUser/Categories";
 import { useTranslation } from "react-i18next";
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { setLanguage } from "./redux/slices/websiteSlice";
 import UserOrders from "./pages/user/UserOrders";
 import UserInvoices from "./pages/user/UserInvoices";
 import TransactionLog from "./pages/user/TransactionLog";
 import OurDistrubitors from "./pages/user/OurDistrubitors";
 import UserSupport from "./pages/user/UserSupport";
+import ProfileSettings from "./pages/user/ProfileSettings";
+import AdminLayout from "./layouts/AdminLayout";
+import DashboardMain from "./pages/dashboard/DashboardMain";
+import DashboardAddUser from "./pages/dashboard/DashboardAddUser";
+import DashboardChargeOperations from "./pages/dashboard/DashboardChargeOperations";
+import DashboardGroups from "./components/dashboard/DashboardGroups";
+import DashboardAddCategory from "./pages/dashboard/DashboardAddCategory";
+import DashboardAllCategories from "./pages/dashboard/DashboardAllCategories";
+import DashboardChargeOrders from "./pages/dashboard/DashboardChargeOrders";
+import DashboardCurrencies from "./pages/dashboard/DashboardCurrencies";
+import DashboardAllProducts from "./pages/dashboard/DashboardAllProducts";
+import DashboardAddProduct from "./pages/dashboard/DashboardAddProduct";
 
 function App() {
+  const { i18n } = useTranslation();
   useEffect(() => {
     // Use the currentLanguage instead of selectedLanguage
-    i18n.changeLanguage(localStorage.getItem("preferredLanguage"));
+    i18n.changeLanguage(localStorage.getItem("preferredLanguage") ?? "en");
     document.body.dir = i18n.dir();
-  }, []); // Include
-
-  const { i18n } = useTranslation();
+  }, [i18n]); // Include
 
   const authenticated = localStorage.getItem("token");
+  const role: "admin" | "client" = "admin";
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route path="/">
-        {authenticated ? (
+        {authenticated && role === "client" ? (
           <Route element={<UserLayout />}>
             <Route path="/" element={<UserMain />} />
             <Route path="/orders" element={<UserOrders />} />
@@ -47,6 +55,26 @@ function App() {
             <Route path="/transaction-log" element={<TransactionLog />} />
             <Route path="/our-distrubitors" element={<OurDistrubitors />} />
             <Route path="/support" element={<UserSupport />} />
+            <Route path="/settings" element={<ProfileSettings />} />
+          </Route>
+        ) : authenticated && role === "admin" ? (
+          <Route element={<AdminLayout />}>
+            <Route path="/" element={<DashboardMain />} />
+            <Route path="/add-user" element={<DashboardAddUser />} />
+            <Route path="/groups" element={<DashboardGroups />} />
+            <Route path="/add-category" element={<DashboardAddCategory />} />
+            <Route path="/charge-orders" element={<DashboardChargeOrders />} />
+            <Route path="/currencies" element={<DashboardCurrencies />} />
+            <Route path="/products" element={<DashboardAllProducts />} />
+            <Route path="/add-product" element={<DashboardAddProduct />} />
+            <Route
+              path="/all-categories"
+              element={<DashboardAllCategories />}
+            />
+            <Route
+              path="/charge-operations"
+              element={<DashboardChargeOperations />}
+            />
           </Route>
         ) : (
           <Route element={<VisitorLayout />}>

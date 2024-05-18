@@ -1,5 +1,6 @@
 {
   
+  "dir": "rtl", 
   "home_link_name": "GoCard ",
   "our_services_link_name": "Services",
   "about_us_link_name": "About Us",
@@ -72,7 +73,110 @@
   "sign_up_enter_alike_passwords_text": "Enter your password",
   "sign_up_false_captcha_text": "Enter your password",
   "sign_up_failed_signin_toast": "Sign in failed.",
-  "sign_uo_successful_signin_toast": "Sign in successful."
+  "sign_uo_successful_signin_toast": "Sign in successful.",
+  
+  "user_navbar":{
+    "logo": "logo",
+    "logout": "Logout",
+    "notification": "notification"
+  },
+  "user_our_distriputer":{
+    "our_agents": "Our Agents ",
+    "general_management": "management",
+    "chat_with_him": "whatsapp "
+  },
+
+  "user_sidebar":{
+    "main": "Go Card ",
+    "orders": "orders",
+    "invoices": "invoices",
+    "transaction_log": "transactions",
+    "our_agents": "Our Agents ",
+    "support": "support",
+    "settings": "settings"
+  },
+  "user_orders":{
+    "title": "orders ",
+    "filter_all_orders": "all",
+    "filter_waiting_orders": "waiting",
+    "filter_success_orders": "succesded",
+    "filter_failed_orders": "failed",
+    "search": "search",
+    "search_placeholder": "search for order",
+    "order_number": "order number",
+    "product": "product ",
+    "player_subscriber": "player/subscriber",
+    "price": "price",
+    "status": "status",
+    "buying_history": "buying history"
+  },
+
+  "user_invoices":{
+    "title": "invoices  ",
+    "charge_money": "charge money",
+    "charge_with_coupon": "add coupon",
+    "search": "search",
+    "search_placeholder": "search for invoice",
+    "payment_ensure": "payment ensure",
+    "invoice_number": "invoice number",
+    "payment_method": "payment method",
+    "ammount": "ammount",
+    "status": "status",
+    "history": "history",
+    "coupon_title": "add a coupon",
+    "coupon_cancel": "cancel",
+    "coupon_check": "check coupon",
+    "bank": "bank",
+    "lord_box": "lord box",
+    "syria_phone": "syria phone",
+    "straight_send": "straight send",
+    "seretel_MTN_cash": "seretel & MTN cash",
+    "paypal": "paypal",
+    "USDT": "USDT",
+    "payeer": "Payeer"
+  },
+
+
+  "transaction_log":{
+    "title": "Transaction Log",
+    "transaction_number": "Transaction Number",
+    "value": "Value",
+    "type": "Type"
+  },
+
+  "support":{
+    "title": "Technical Support",
+    "text": "If you have any questions, inquiries, or want to provide suggestions for the website, you can contact the support team.",
+    "whatsapp": "WhatsApp",
+    "telegram": "Telegram"
+  },
+
+
+  "profile_settings": {
+    "title": "Settings",
+    "full_name": "Full Name",
+    "full_name_placeholder": "Full Name",
+    "email": "Email",
+    "email_placeholder": "Email",
+    "phone_number": "Phone Number",
+    "phone_number_placeholder": "Phone Number",
+    "save_data": "Save Data",
+    "old_password": "Old Password",
+    "old_password_placeholder": "Old Password",
+    "new_password": "New Password",
+    "new_password_placeholder": "New Password",
+    "reenter_new_password": "Re-enter New Password",
+    "reenter_new_password_placeholder": "Re-enter New Password",
+    "change_password": "Change Password",
+    "image_size_alert": "Image size exceeds the allowed limit (200 KB)",
+    "profile_image": "Profile Image",
+    "select_file": "Select a file"
+  }
+
+
+
+
+
   
   
 }

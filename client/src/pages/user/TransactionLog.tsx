@@ -1,6 +1,8 @@
-import React from "react";
+import { useTranslation } from "react-i18next";
 
 const TransactionLog = () => {
+  const { t } = useTranslation();
+
   return (
     <section className=" bg-blueGray-50 w-full ">
       <div className="w-full `px-4 mx-auto text-lg ">
@@ -9,7 +11,7 @@ const TransactionLog = () => {
             <div className="flex flex-wrap items-center flex-row-reverse  justify-between  ">
               <div className="relative  px-4 ">
                 <h3 className="font-semibold  w-fit text-3xl rtl:text-right text-blueGray-700">
-                  سجل العمليات
+                  {t("transaction_log.title")}
                 </h3>
               </div>
             </div>
@@ -19,14 +21,14 @@ const TransactionLog = () => {
             <table className="items-center bg-transparent w-full border-collapse ">
               <thead>
                 <tr>
-                  <th className="px-6 bg-blueGray-50 text-blueGray-500 text-center align-middle border border-solid border-blueGray-100 py-3 text-lg uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold ">
-                    رقم العملية
+                  <th className="px-6 bg-blueGray-50 text-blueGray-500 text-center align-middle border border-solid border-blueGray-100 py-3 text-lg  border-l-0 border-r-0 whitespace-nowrap font-semibold ">
+                    {t("transaction_log.transaction_number")}
                   </th>
-                  <th className="px-6 bg-blueGray-50 text-blueGray-500 text-center align-middle border border-solid border-blueGray-100 py-3 text-lg uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold ">
-                    القيمة
+                  <th className="px-6 bg-blueGray-50 text-blueGray-500 text-center align-middle border border-solid border-blueGray-100 py-3 text-lg  border-l-0 border-r-0 whitespace-nowrap font-semibold ">
+                    {t("transaction_log.value")}
                   </th>
-                  <th className="px-6 bg-blueGray-50 text-blueGray-500 text-center align-middle border border-solid border-blueGray-100 py-3 text-lg uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold ">
-                    العملية
+                  <th className="px-6 bg-blueGray-50 text-blueGray-500 text-center align-middle border border-solid border-blueGray-100 py-3 text-lg  border-l-0 border-r-0 whitespace-nowrap font-semibold ">
+                    {t("transaction_log.type")}
                   </th>
                 </tr>
               </thead>

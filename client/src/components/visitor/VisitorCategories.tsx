@@ -57,13 +57,18 @@ const Category: React.FC<CategoryProps> = ({ image, title }) => {
       </div>
       <AnimatePresence>
         {isBottomSheetVisible && (
-          <motion.div
-            ref={bottomSheetRef}
-            className="bg-red-200 h-[90vh] fixed bottom-0 left-0 right-0 p-4 w-full z-50"
-            initial={{ y: 700 }}
-            animate={{ y: 100 }}
-            exit={{ y: 700, transition: { ease: "linear", duration: 0.3 } }}
-          ></motion.div>
+          <>
+            <div
+              className="fixed inset-0 bg-black opacity-50 z-50"
+              onClick={() => setIsBottomSheetVisible(false)} // Close bottom sheet when overlay is clicked
+            ></div>
+            <motion.div
+              className="bg-red-200 h-[90vh] fixed bottom-0 left-0 right-0 p-4 w-full z-50"
+              initial={{ y: 700 }}
+              animate={{ y: 100 }}
+              exit={{ y: 700, transition: { ease: "linear", duration: 0.3 } }}
+            ></motion.div>
+          </>
         )}
       </AnimatePresence>
     </>

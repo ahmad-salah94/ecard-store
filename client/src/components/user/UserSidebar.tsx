@@ -1,10 +1,12 @@
+import { useTranslation } from "react-i18next";
 import { FaHome, FaUser } from "react-icons/fa"; // Example icons from React Icons
 import { IoIosSettings } from "react-icons/io";
 import { NavLink } from "react-router-dom";
 // user sidebar
 const UserSidebar = () => {
+  const { t } = useTranslation();
   return (
-    <nav className="w-[210px] bg-primary text-white min-h-[750px] p-6 rounded-lg fixed top-[125px] right-[5vh] flex flex-col justify-center text-md font-bold ">
+    <nav className="w-[210px] hidden sm:flex bg-primary text-white  rtl:left-[5vw]  min-h-[750px] p-6 rounded-lg fixed top-[125px] ltr:right-[5vw]  flex-col justify-center text-md font-bold ">
       <div className="flex flex-col justify-between h-[650px]  ">
         <ul className="flex flex-col  w-full text-lg font-normal   ">
           <li>
@@ -16,7 +18,7 @@ const UserSidebar = () => {
                   : "flex justify-end items-center w-full mb-4 p-1 pr-3"
               }
             >
-              <h3 className="mr-2">الرئيسية</h3>
+              <h3 className="mr-2"> {t("user_sidebar.main")} </h3>
               <FaHome />
             </NavLink>
           </li>
@@ -29,7 +31,7 @@ const UserSidebar = () => {
                   : "flex justify-end items-center w-full mb-4 p-1 pr-3"
               }
             >
-              <h3 className="mr-2">الطلبات</h3>
+              <h3 className="mr-2"> {t("user_sidebar.orders")} </h3>
               <FaUser />
             </NavLink>
           </li>
@@ -42,7 +44,7 @@ const UserSidebar = () => {
                   : "flex justify-end items-center w-full mb-4 p-1 pr-3"
               }
             >
-              <h3 className="mr-2">الفواتير</h3>
+              <h3 className="mr-2">{t("user_sidebar.invoices")}</h3>
               <IoIosSettings />
             </NavLink>
           </li>
@@ -55,7 +57,7 @@ const UserSidebar = () => {
                   : "flex justify-end items-center w-full mb-4 p-1 pr-3"
               }
             >
-              <h3 className="mr-2">سجل العمليات</h3>
+              <h3 className="mr-2">{t("user_sidebar.transaction_log")}</h3>
               <IoIosSettings />
             </NavLink>
           </li>
@@ -68,7 +70,7 @@ const UserSidebar = () => {
                   : "flex justify-end items-center w-full mb-4 p-1 pr-3"
               }
             >
-              <h3 className="mr-2">وكلاؤنا</h3>
+              <h3 className="mr-2">{t("user_sidebar.our_agents")}</h3>
               <IoIosSettings />
             </NavLink>
           </li>
@@ -81,7 +83,7 @@ const UserSidebar = () => {
                   : "flex justify-end items-center w-full mb-4 p-1 pr-3"
               }
             >
-              <h3 className="mr-2">الدعم الفني</h3>
+              <h3 className="mr-2">{t("user_sidebar.support")}</h3>
               <IoIosSettings />
             </NavLink>
           </li>
@@ -95,7 +97,7 @@ const UserSidebar = () => {
               : "flex justify-end items-center w-full mb-4 p-1 pr-3"
           }
         >
-          <h3 className="mr-2 text-lg">الاعدادات</h3>
+          <h3 className="mr-2 text-lg">{t("user_sidebar.settings")}</h3>
           <IoIosSettings />
         </NavLink>
       </div>
