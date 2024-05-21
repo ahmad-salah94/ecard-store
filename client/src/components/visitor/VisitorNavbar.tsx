@@ -7,13 +7,13 @@ import { useTranslation } from "react-i18next";
 const VisitorNavbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedLanguage, setSelectedLanguage] = useState<"ar" | "en">(
-    localStorage.getItem("preferredLanguage") || "en"
+    (localStorage.getItem("preferredLanguage") as "ar" | "en") ?? "en"
   );
   // Initial language set to Arabic
 
   useEffect(() => {
     // Use the currentLanguage instead of selectedLanguage
-    i18n.changeLanguage(localStorage.getItem("preferredLanguage"));
+    i18n.changeLanguage(localStorage.getItem("preferredLanguage") ?? "");
     document.body.dir = i18n.dir();
   }, [selectedLanguage]); // Include
 
@@ -29,12 +29,12 @@ const VisitorNavbar = () => {
   const { t } = useTranslation();
 
   return (
-    <nav className=" px-5 py-2 flex justify-between items-center container mx-auto flex-row h-[70px] fixed top-0 bg-white shadow-lg z-50">
+    <nav className="  p-4  flex justify-between items-center w-full mx-auto h-[70px]  shadow-lg fixed top-0 bg-white z-[100] ">
       <div className="text-xl font-bold text-primary">LOGO</div>
 
       {/* Desktop Navigation */}
 
-      <div className="hidden md:flex   gap-4 relative">
+      <div className="hidden md:flex  justify-center items-center h-full z-10 relative">
         <div className="relative group ">
           <Link
             to={"/categories"}
@@ -73,11 +73,11 @@ const VisitorNavbar = () => {
 
       {/* Mobile Navigation */}
       <div
-        className={`fixed top-[0px] md:w-[400px] pt-[100px] w-[340px] md:hidden ${
+        className={`fixed top-[0px] md:w-[400px] w-[300px] z-50 rtl:right-0 ${
           isOpen
-            ? "translate-x-[0px]"
-            : "md:translate-x-[400px] translate-x-[340px] "
-        }  transition-all duration-300 right-0 h-screen  bg-white p-4 flex flex-col items-center space-y-4 z-50`}
+            ? "-translate-x-[0px] opacity-100"
+            : "md:-translate-x-[400px] opacity-0 -translate-x-[300px]  rtl:md:translate-x-[400px] rtl:translate-x-[300px] "
+        }  transition-all duration-300 left-0 h-screen  bg-white p-4 flex flex-col items-center space-y-4 z-50`}
       >
         {["#contact-us", "#about-us", "#our-services", "#home"].map(
           (path, index) => (

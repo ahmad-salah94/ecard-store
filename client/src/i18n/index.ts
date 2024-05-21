@@ -10,10 +10,12 @@ const resources = {
   en: {
     translation: landingPagetranslationsInEng,
     direction: 'ltr',
+    dir: 'ltr',
   },
   ar: {
     translation: landingPagetranslationsInArabic,
     direction: 'rtl',
+    dir: 'rtl',
   },
 };
 
