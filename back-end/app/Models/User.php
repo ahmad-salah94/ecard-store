@@ -32,7 +32,8 @@ class User extends Authenticatable implements JWTSubject
         'password',
         'social_id',
         'social_type',
-        'currency_id'
+        'currency_id',
+        'group_id'
     ];
 
     /**
@@ -47,6 +48,10 @@ class User extends Authenticatable implements JWTSubject
     public function currency()
     {
         return $this->hasMany(Currency::class, "currency_id");
+    }
+    public function group()
+    {
+        return $this->hasMany(Group::class, "group_id");
     }
     /**
      * Get the attributes that should be cast.

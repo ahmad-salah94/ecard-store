@@ -32,6 +32,8 @@ class AuthController extends Controller
             'name' => 'required',
             'email' => 'required|email|unique:users',
             'address' => 'nullable',
+            'currency_id' => 'nullable',
+            'group_id' => 'nullable',
             //'phone' => 'required|unique:users',
             'password' => 'required|min:6',
         ]);

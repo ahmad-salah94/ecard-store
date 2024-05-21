@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\CurrencyController;
+use App\Http\Controllers\Api\GroupController;
 use App\Http\Controllers\Api\PaypalController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\StripeController;
@@ -51,6 +52,13 @@ Route::group(['prefix'=>'currency'],function($router){
   Route::get('/index', [CurrencyController::class, 'index']);
   Route::post('/update/{id}', [CurrencyController::class, 'update']);
   Route::delete('/delete/{id}', [CurrencyController::class, 'delete']);
+});
+//group
+Route::group(['prefix'=>'group'],function($router){
+  Route::post('/store', [GroupController::class, 'store']);
+  Route::get('/index', [GroupController::class, 'index']);
+  Route::post('/update/{id}', [GroupController::class, 'update']);
+  Route::delete('/delete/{id}', [GroupController::class, 'delete']);
 });
 
 

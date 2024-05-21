@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('social_type')->nullable();
             $table->string('avatar')->nullable();
             $table->bigInteger('currency_id')->nullable();
+            $table->bigInteger('group_id')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
