@@ -14,9 +14,8 @@ class GroupController extends Controller
             'name' => 'required|unique:groups,name',
             'image' => 'nullable|image', // Added image validation
             'agent_ratio' => 'required',
-            'price' => 'required|unique:groups,price', // Assuming 'price' is a field in groups
+            // 'price' => 'required|unique:groups,price', // Assuming 'price' is a field in groups
             'pricing_type' => 'nullable',
-            'purchase_price' => 'nullable|numeric',
             'maturity_value' => 'nullable|numeric',
             'type' => 'nullable|integer',
             'private_group' => 'nullable|boolean',
@@ -24,9 +23,8 @@ class GroupController extends Controller
     
         $group = new Group();
         $group->name = $request->input('name');
-        $group->abbreviation = $request->input('agent_ratio');
+        $group->agent_ratio = $request->input('agent_ratio');
         $group->pricing_type = $request->input('pricing_type');
-        $group->purchase_price = $request->input('purchase_price');
         $group->maturity_value = $request->input('maturity_value');
         $group->type = $request->input('type', '0');
         $group->private_group = $request->input('private_group', '0');
@@ -57,12 +55,10 @@ class GroupController extends Controller
     {
         // التحقق من المدخلات
         $request->validate([
-            'name' => 'required|unique:groups,name,' . $id,
+            'name' => 'required',
             'image' => 'nullable|image',
             'agent_ratio' => 'required',
-            'price' => 'required',
             'pricing_type' => 'nullable',
-            'purchase_price' => 'nullable|numeric',
             'maturity_value' => 'nullable|numeric',
             'type' => 'nullable|integer',
             'private_group' => 'nullable|boolean',
@@ -77,9 +73,8 @@ class GroupController extends Controller
         }
     
         $group->name = $request->input('name');
-        $group->abbreviation = $request->input('agent_ratio');
+        $group->agent_ratio = $request->input('agent_ratio');
         $group->pricing_type = $request->input('pricing_type');
-        $group->purchase_price = $request->input('purchase_price');
         $group->maturity_value = $request->input('maturity_value');
         $group->type = $request->input('type', '0');
         $group->private_group = $request->input('private_group', '0');

@@ -23,7 +23,7 @@ class CurrencyController extends Controller
         $currency->abbreviation = $request->input('abbreviation');
         $currency->price = $request->input('price');
         $currency->purchase_price = $request->input('purchase_price');
-        $currency->price = $request->input('price');
+        $currency->code = $request->input('code');
         $currency->type = $request->input('type', '0');
         $currency->register_accounts = $request->input('register_accounts', '0');
         $currency->save();
@@ -57,6 +57,7 @@ class CurrencyController extends Controller
         $currency->name = $request->input('name');
         $currency->abbreviation = $request->input('abbreviation');
         $currency->price = $request->input('price');
+        $currency->code = $request->input('code');
         $currency->purchase_price = $request->input('purchase_price');
         $currency->type = $request->input('type', '0');
         $currency->register_accounts = $request->input('register_accounts', '0');
