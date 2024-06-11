@@ -36,28 +36,28 @@ Route::group(['middleware' => 'auth:api','prefix'=>'auth'],function($router){
 Route::group(['middleware' => 'auth:api','prefix'=>'category'],function($router){
   Route::post('/store', [CategoryController::class, 'store']);
   Route::get('/index', [CategoryController::class, 'index']);
-  Route::post('/update/{id}', [CategoryController::class, 'update']);
+  Route::put('/update/{id}', [CategoryController::class, 'update']);
   Route::delete('/delete/{id}', [CategoryController::class, 'delete']);
 });
 //product
 Route::group(['middleware' => 'auth:api','prefix'=>'product'],function($router){
   Route::post('/store', [ProductController::class, 'store']);
   Route::get('/index', [ProductController::class, 'index']);
-  Route::post('/update/{id}', [ProductController::class, 'update']);
+  Route::put('/update/{id}', [ProductController::class, 'update']);
   Route::delete('/delete/{id}', [ProductController::class, 'delete']);
 });
 //currency
 Route::group([ 'middleware' => 'auth:api','prefix'=>'currency'],function($router){
   Route::post('/store', [CurrencyController::class, 'store']);
   Route::get('/index', [CurrencyController::class, 'index']);
-  Route::post('/update/{id}', [CurrencyController::class, 'update']);
+  Route::put('/update/{id}', [CurrencyController::class, 'update']);
   Route::delete('/delete/{id}', [CurrencyController::class, 'delete']);
 });
 //group
 Route::group(['middleware' => 'auth:api','prefix'=>'group'],function($router){
   Route::post('/store', [GroupController::class, 'store']);
   Route::get('/index', [GroupController::class, 'index']);
-  Route::post('/update/{id}', [GroupController::class, 'update']);
+  Route::put('/update/{id}', [GroupController::class, 'update']);
   Route::delete('/delete/{id}', [GroupController::class, 'delete']);
 });
 
