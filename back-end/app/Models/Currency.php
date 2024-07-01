@@ -17,4 +17,9 @@ class Currency extends Model
     {
         return $this->belongsTo(Product::class, "currency_id");
     }
+    public function payment()
+    {
+        return $this->belongsTo(Payment::class, "currency_id");
+    }
+
 }

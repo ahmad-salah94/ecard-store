@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\GroupController;
 use App\Http\Controllers\Api\PaypalController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\StripeController;
+use App\Http\Controllers\Api\WalletController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -59,6 +60,14 @@ Route::group(['middleware' => 'auth:api','prefix'=>'group'],function($router){
   Route::get('/index', [GroupController::class, 'index']);
   Route::put('/update/{id}', [GroupController::class, 'update']);
   Route::delete('/delete/{id}', [GroupController::class, 'delete']);
+});
+
+Route::group(['prefix'=>'wallet'],function($router){
+  Route::get('/payment-methods', [WalletController::class, 'index']);
+  // Route::get('/payment-methods/{id}', [WalletController::class, 'show']);
+  Route::post('/payment-methods', [WalletController::class, 'store']);
+  Route::put('/payment-methods/{id}', [WalletController::class, 'update']);
+  Route::delete('/payment-methods/{id}', [WalletController::class, 'destroy']);
 });
 
 

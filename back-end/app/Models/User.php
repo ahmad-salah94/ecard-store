@@ -53,6 +53,10 @@ class User extends Authenticatable implements JWTSubject
     {
         return $this->hasMany(Group::class, "group_id");
     }
+    public function payment()
+    {
+        return $this->belongsTo(Payment::class, "user_id");
+    }
     /**
      * Get the attributes that should be cast.
      *
