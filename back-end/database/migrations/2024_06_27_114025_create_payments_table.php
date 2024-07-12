@@ -19,7 +19,7 @@ return new class extends Migration
             $table->decimal('value')->nullable();
             $table->decimal('dollar_value')->nullable();
             $table->string('image')->nullable();
-            $table->string('payment')->nullable();
+            $table->string('status')->nullable();
             $table->timestamps();
         });
     }

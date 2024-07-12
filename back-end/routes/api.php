@@ -68,6 +68,12 @@ Route::group(['prefix'=>'wallet'],function($router){
   Route::post('/payment-methods', [WalletController::class, 'store']);
   Route::put('/payment-methods/{id}', [WalletController::class, 'update']);
   Route::delete('/payment-methods/{id}', [WalletController::class, 'destroy']);
+  //chargeWallet
+  Route::post('/charge/{user}/{currency}/{method}', [WalletController::class, 'chargeWallet']);
+  Route::post('/accept/charge/{payment}', [WalletController::class, 'acceptWalletCharge']);
+  Route::post('/reject/charge/{payment}', [WalletController::class, 'rejectWalletCharge']);
+  Route::get('/{id}', [WalletController::class, 'wallet']);
+
 });
 
 

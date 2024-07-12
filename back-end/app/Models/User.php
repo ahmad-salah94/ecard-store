@@ -57,6 +57,10 @@ class User extends Authenticatable implements JWTSubject
     {
         return $this->belongsTo(Payment::class, "user_id");
     }
+    public function wallet()
+    {
+        return $this->hasOne(Wallet::class, "user_id");
+    }
     /**
      * Get the attributes that should be cast.
      *

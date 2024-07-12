@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Payment;
 use App\Models\PaymentMethod;
 use App\Models\PaymentMethodRequirement;
+use App\Models\Wallet;
 use Illuminate\Http\Request;
 
 class WalletController extends Controller
@@ -122,8 +123,11 @@ class WalletController extends Controller
     
         $payment = new Payment();
         $payment->value = $request->input('value');
+        $payment->user_id = $user_id;
+        $payment->method_id = $method;
+        $payment->currency_id = $currency;
         $payment->dollar_value = $request->input('dollar_value');
-        $payment->status = 'pending';
+        $payment->status = 'Pending';
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $imageName = time() . '.' . $image->getClientOriginalExtension();
@@ -136,6 +140,41 @@ class WalletController extends Controller
             'status' => 200,
             'payment' => $payment,
         ]);
+    }
+    public function acceptWalletCharge($id){
+        $payment = Payment::findOrFail($id);
+        $payment->status = 'Accepted';
+        $payment->save();
+        $wallet = Wallet::where('user_id',$payment->user_id)->firstOrCreate(
+            ['user_id' => $payment->user_id], 
+            ['value' => '0'], 
+        );
+        $wallet->update([
+            'value'=>$wallet->value + $payment->value
+        ]);
+        return response()->json([
+            'status' => 200,
+            'payment' => $payment,
+            'wallet'=>$wallet->load('user')
+        ]);
+
+
+    }
+    public function rejectWalletCharge($id){
+        $payment = Payment::findOrFail($id);
+        $payment->status = 'Rejected';
+        $payment->save();
+        return response()->json([
+            'status' => 200,
+            'payment' => $payment,
+        ]);
+    }
+    public function wallet($user_id){
+        $wallet = Wallet::where('user_id',$user_id)->firstOrCreate(
+            ['user_id' => $user_id], 
+            ['value' => '0'], 
+        )
+    ;return $wallet;
     }
     
     
