@@ -73,6 +73,8 @@ Route::group(['prefix'=>'wallet'],function($router){
   Route::post('/accept/charge/{payment}', [WalletController::class, 'acceptWalletCharge']);
   Route::post('/reject/charge/{payment}', [WalletController::class, 'rejectWalletCharge']);
   Route::get('/{id}', [WalletController::class, 'wallet']);
+  Route::get('/payments/{status}', [WalletController::class, 'payments']);
+
 
 });
 

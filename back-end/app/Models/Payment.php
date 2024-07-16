@@ -11,14 +11,14 @@ class Payment extends Model
     protected $guarded = [];
     public function method()
     {
-        return $this->hasMany(PaymentMethod::class, "method_id");
+        return $this->hasMany(PaymentMethod::class, "id");
     }
     public function currency()
     {
-        return $this->hasMany(Currency::class, "currency_id");
+        return $this->hasMany(Currency::class, "id");
     }
     public function user()
     {
-        return $this->hasMany(User::class, "user_id");
+        return $this->hasMany(User::class, "id");
     }
 }

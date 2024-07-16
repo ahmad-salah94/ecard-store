@@ -176,6 +176,25 @@ class WalletController extends Controller
         )
     ;return $wallet;
     }
+     
+    public function payments($status){
+        switch ($status) {
+            case 1:
+                $payment = Payment::where('status', 'Pending')->with('user','method')->get();
+                break;
+            case 2:
+                $payment = Payment::where('status', 'Accepted')->with('user','method')->get();
+                break;
+            case 3:
+                $payment = Payment::where('status', 'Rejected')->with('user','method')->get();
+                break;
+            default:
+            $payment = Payment::with('user','method')->get();
+                break;
+        }
+    
+        return $payment;
+    }
     
     
 
